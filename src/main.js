@@ -47,6 +47,11 @@ Object.keys(filters).forEach(key => {
 
 Vue.config.productionTip = false
 
+import moment from 'moment'
+Vue.filter('dateFormat',function(dateStr){
+  return moment(dateStr).format('YYYY-MM-DD HH:mm:ss');
+})
+
 new Vue({
   el: '#app',
   router,
