@@ -4,7 +4,7 @@
     <div class="btns">
       <el-form :inline="true" :model="formInline" class="demo-form-inline">
       <!-- <el-button class="sign_btn" type="primary" @click="SignInHandler">签到</el-button> -->
-        <el-form-item label="课程名称">
+        <el-form-item label="课程名称" size="small">
           <el-select v-model="formInline.courseId" placeholder="课程名称" clearable>
             <el-option v-for="s in courses" :label="s.name" :value="s.id" :key="s.id"></el-option>
           </el-select>
@@ -18,11 +18,11 @@
     <!-- /按钮 -->
     <!-- 表格 -->
     <el-table :data="signs.list" size="small">
-      <el-table-column label="编号" prop="id" width="50px" />
-      <el-table-column label="名称" prop="type" />
+      <el-table-column label="编号" prop="id" type="selection" width="80px" />
+      <el-table-column label="名称" prop="type" width="100px"/>
       <el-table-column label="会员名" prop="userName" />
-      <el-table-column label="签到时间" prop="signTime" :formatter="dateFormat"/>
-      <el-table-column label="签到地址" prop="address" />
+      <el-table-column label="签到时间" prop="signTime" :formatter="dateFormat" />
+      <el-table-column label="签到地址" prop="address" width="350px"/>
       <el-table-column label="课程名称" prop="courseName" />
       <el-table-column label="操作" width="100px" align="center">
         <template slot-scope="scope">
