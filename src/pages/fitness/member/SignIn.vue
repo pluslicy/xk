@@ -3,67 +3,26 @@
   <div class="sign_id">
     <!-- /按钮 -->
     <!-- 表格 -->
-    <el-table size="small" :data="courses">
-      <el-table-column type="index" :index="1" label="序号" />
-      <!-- <el-table-column label="编号" prop="id" width="50px"></el-table-column> -->
-      <el-table-column label="课程名称" prop="name" width="150px" />
-      <el-table-column label="课程日期" prop="courseDay">
-        <template slot-scope="scope">
-          {{ scope.row.courseDay }} , {{ scope.row.courseTime }}
-        </template>
-      </el-table-column>
-      <el-table-column label="操作" width="100px" align="center">
-        <template slot-scope="scope">
-          <el-button
-            type="text"
-            size="mini"
-            :disabled="scope.row.courseDay !=getWeekDay() "
-            @click="toSignIn(scope.row)"
-          >签到</el-button>
-          <!-- <el-button type="text" size="mini"
-            :disabled="scope.row.courseDay !=getWeekDay() "
-            @click="toSignOut(scope.row)">签退</el-button> -->
-        </template>
-      </el-table-column>
-    </el-table>
+    <van-card
+      v-for="c in courses"
+      :key="c.id"
+      :desc="c.description"
+      :title="c.name" >
+      <div slot="tags">
+        <van-tag plain type="danger">{{ c.courseDay }}</van-tag>
+        <van-tag plain type="danger">{{ c.courseTime }}</van-tag>
+      </div>
+      <div slot="footer">
+        <van-button size="mini" type="primary" 
+        :disabled="c.courseDay !=getWeekDay() "
+          @click="toSignIn(c)">签到</van-button>
+      </div>
+    </van-card>
     <!-- /表格 -->
-    <!-- 模态框 -->
-    <el-dialog :title="title" :visible.sync="visible" width="90%">
-      <!-- {{form}} -->
-      <div>
-        <el-row>
-          <el-col :span="6"><strong>课程名称：</strong></el-col>
-          <el-col :span="18">{{ form.courseName }}</el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="6"><strong>课程时间：</strong></el-col>
-          <el-col :span="18">{{ form.courseDay }}, {{ form.courseTime }}</el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="6"><strong>经度：</strong></el-col>
-          <el-col :span="18">{{ form.longitude }}</el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="6"><strong>维度：</strong></el-col>
-          <el-col :span="18">{{ form.latitude }}</el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="6"><strong>地址：</strong></el-col>
-          <el-col :span="18">{{ form.address }}</el-col>
-        </el-row>
-        <!-- 地图 -->
-        <Location @loaded="loadedHandler" />
-      </div>
-      <div slot="footer" class="dialog-footer">
-        <el-button type="primary" size="small" @click="submitHandler">签到</el-button>
-      </div>
-    </el-dialog>
-    <!-- /模态框 -->
   </div>
 </template>
 
 <script>
-import Location from '@/components/Fitness/Map/Location'
 import { get, post } from '@/utils/request'
 import { mapState } from 'vuex'
 import moment from 'moment'
@@ -74,47 +33,24 @@ export default {
   data() {
     return {
       title: '',
-      visible: false,
       courses: [],
-      form: {
-
-      }
+      form:{}
     }
   },
   created() {
     this.loadUserCourses()
   },
-  mounted() {
-
-  },
+  mounted() { },
   computed: {
     ...mapState('user', ['userId', 'roles', 'name']),
     test() {
-      // moment("2020-01-01 10:00").diff(moment("2020-01-01 10:39"),'minutes' )
       const day = moment().format('YYYY-MM-DD')
       return moment(day + ' 10:00').diff(moment(day + ' 10:39'), 'minutes')
     }
   },
-  components: {
-    Location
-  },
+ 
   methods: {
     moment,
-    // 签到
-    submitHandler() {
-      const url = '/sign/in'
-      post(url, this.form).then(response => {
-        this.$message({ type: 'success', message: response.message })
-        this.visible = false
-      })
-    },
-    // 加载地图回调函数
-    loadedHandler(location) {
-      this.form.longitude = location.longitude
-      this.form.latitude = location.latitude
-      this.form.address = location.address
-      this.form = _.clone(this.form)
-    },
     // 签到
     toSignIn(record) {
       const day = moment().format('YYYY-MM-DD')
@@ -131,7 +67,8 @@ export default {
       this.form.courseName = record.name
       this.form.courseDay = record.courseDay
       this.form.courseTime = record.courseTime
-      this.visible = true
+      // this.visible = true
+      this.$router.push({path:'/fitness/member/SignForm',query:this.form})
       // } else {
       //   this.$message({type:"warning",message:"不在签到时间范围内"})
       // }

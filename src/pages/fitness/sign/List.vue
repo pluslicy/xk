@@ -18,17 +18,17 @@
     <!-- /按钮 -->
     <!-- 表格 -->
     <el-table :data="signs.list" size="small">
-      <el-table-column label="编号" prop="id" type="selection" width="80px" />
-      <el-table-column label="名称" prop="type" width="100px"/>
-      <el-table-column label="会员名" prop="userName" />
-      <el-table-column label="签到时间" prop="signTime" :formatter="dateFormat" />
-      <el-table-column label="签到地址" prop="address" width="350px"/>
-      <el-table-column label="课程名称" prop="courseName" />
-      <el-table-column label="操作" width="100px" align="center">
+      <el-table-column label="序号" type="index" :index="1" />
+      <el-table-column label="名称" prop="type" width="60px"/>
+      <el-table-column label="会员名" prop="userName" width="80px" />
+      <el-table-column label="课程名称" prop="courseName" width="80px"/>
+      <el-table-column label="签到时间" prop="signTime" width="150px" :formatter="dateFormat" />
+      <el-table-column label="签到地址" prop="address" />
+      <!-- <el-table-column label="操作" width="100px" align="center">
         <template slot-scope="scope">
           <a href="" @click.prevent="toDetailsHandler(scope.row)">详情</a>
         </template>
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
     <!-- /表格 -->
     <!-- {{signs}} -->
@@ -40,6 +40,7 @@
       :page-size="signs.pageSize"
       :current-page="signs.page"
       @current-change="pageChangeHandler"
+      :hide-on-single-page="true"
     />
     <!-- /分页 -->
   </div>
@@ -56,7 +57,7 @@ export default {
       courses:{},
       formInline: {
         page:1,
-        pageSize:5
+        pageSize:10
       }
     }
   },
@@ -82,7 +83,7 @@ export default {
       // console.log("row",row)
       // console.log("colnum",colnum)
       // console.log("colnum.property",colnum.property)
-      return moment(row[colnum.property]).format('YYYY-MM-DD')
+      return moment(row[colnum.property]).format('YYYY-MM-DD HH:mm:ss')
     },
     // 查询所有课程
     loadCourses() {
