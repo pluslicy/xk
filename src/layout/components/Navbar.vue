@@ -1,5 +1,5 @@
 <template>
-    
+
   <div class="navbar" style="border-top: 2px solid #386c9c;">
     <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
 

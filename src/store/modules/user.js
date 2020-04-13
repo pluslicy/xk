@@ -10,7 +10,7 @@ const state = {
   introduction: '',
   roles: [],
   roleIds: [],
-  user:{}
+  user: {}
 }
 
 const mutations = {
@@ -35,8 +35,8 @@ const mutations = {
   SET_ROLE_IDS: (state, roleIds) => {
     state.roleIds = roleIds
   },
-  SET_USER:(state,user)=>{
-    state.user = user;
+  SET_USER: (state, user) => {
+    state.user = user
   }
 }
 
@@ -65,7 +65,7 @@ const actions = {
         if (!data) {
           reject('Verification failed, please Login again.')
         }
-        commit('SET_USER',data)
+        commit('SET_USER', data)
         const { realname: name, userFace: avatar, introduction, id } = data
         // [{id:1,name:"编辑"},{id:2,name:"管理员"}]
         const roles = data.roles.map(item => item.name)

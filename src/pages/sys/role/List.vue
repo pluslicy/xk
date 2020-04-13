@@ -4,8 +4,8 @@
     <div class="btns">
       <el-button type="primary" size="small" @click="toAdd">添加</el-button>
     </div>
-    <el-table :data="roles" size="small" v-loading="loading">
-      <el-table-column type="index" :index="1" label="序号"/>
+    <el-table v-loading="loading" :data="roles" size="small">
+      <el-table-column type="index" :index="1" label="序号" />
       <el-table-column prop="name" label="角色名称" />
       <el-table-column label="操作" align="center" width="180">
         <template slot-scope="scope">
@@ -54,7 +54,7 @@ export default {
   data() {
     return {
       form: {},
-      loading:false,
+      loading: false,
       visible: false,
       authorization_visible: false,
       title: '添加角色',
@@ -118,12 +118,12 @@ export default {
       })
     },
     loadPrivileges() {
-      this.loading = true;
+      this.loading = true
       request.get('/privilege/findPrivilegeTree')
         .then(response => {
           this.foo(response.data)
           this.options = response.data
-          this.loading = false;
+          this.loading = false
         })
     },
     // 递归去除权限中的空children

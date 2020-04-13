@@ -63,7 +63,7 @@ export default {
     },
     // 解析定位错误信息
     onError(data) {
-      this.$emit('onError','设备异常，定位失败')
+      this.$emit('onError', '设备异常，定位失败')
     },
     getGeolocation() {
       geolocation.getCurrentPosition()

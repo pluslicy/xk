@@ -6,20 +6,20 @@
         <el-button type="primary" size="small" @click="toAdd">添加</el-button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <el-form-item>
-          <el-input placeholder="请输入用户名" v-model="param.username"></el-input>
+          <el-input v-model="param.username" placeholder="请输入用户名" />
         </el-form-item>
         <el-form-item>
           <el-select v-model="param.rolename" placeholder="请选择角色" clearable>
-            <el-option v-for="r in roles" :key="r.id" :label="r.name" :value="r.name"></el-option>
+            <el-option v-for="r in roles" :key="r.id" :label="r.name" :value="r.name" />
           </el-select>
         </el-form-item>
         <el-button type="text" size="small" @click="loadUsers">搜索</el-button>
       </el-form>
     </div>
-    <el-table :data="users.list" size="small" v-loading="loading">
-      <el-table-column type="index" :index="1" label="序号"/>
-      <el-table-column prop="username" label="用户名" width="120"/>
-      <el-table-column prop="realname" label="姓名" width="120"/>
+    <el-table v-loading="loading" :data="users.list" size="small">
+      <el-table-column type="index" :index="1" label="序号" />
+      <el-table-column prop="username" label="用户名" width="120" />
+      <el-table-column prop="realname" label="姓名" width="120" />
       <el-table-column label="角色" width="100">
         <template slot-scope="scope">
           {{ scope.row.role_name }}
@@ -33,7 +33,7 @@
       </el-table-column>
       <el-table-column prop="status" label="状态" width="60" />
       <el-table-column prop="telephone" label="手机号" />
-      
+
       <el-table-column label="操作" align="center" width="160">
         <template slot-scope="scope">
           <a type="text" size="small" @click.prevent="toSetRole(scope.row)">设置</a>
@@ -44,13 +44,16 @@
       </el-table-column>
     </el-table>
     <!-- 分页 -->
-    <el-pagination background layout="prev, pager, next" small
+    <el-pagination
+      background
+      layout="prev, pager, next"
+      small
       :hide-on-single-page="true"
-      :total="users.total" 
-      :page-size="users.pageSize" 
+      :total="users.total"
+      :page-size="users.pageSize"
       :current-page="users.page"
-      @current-change="currentChangeHandler">
-    </el-pagination>
+      @current-change="currentChangeHandler"
+    />
     <!-- 分页 -->
     <!-- 模态框 -->
     <el-dialog :title="title" :visible.sync="visible">
@@ -109,16 +112,16 @@ export default {
   data() {
     return {
       form: {},
-      loading:false,
+      loading: false,
       visible: false,
       role_visible: false,
       title: '添加用户',
       user: {},
       users: [],
       roles: [],
-      param:{
-        page:1,
-        pageSize:13
+      param: {
+        page: 1,
+        pageSize: 13
       },
       props: { multiple: true, value: 'id', label: 'name', emitPath: false },
       rules: {
@@ -168,15 +171,15 @@ export default {
       this.visible = true
     },
     loadUsers() {
-      this.loading = true;
-      get('/baseUser/pageQuery',this.param)
+      this.loading = true
+      get('/baseUser/pageQuery', this.param)
         .then(response => {
           response.data.list.forEach(item => {
             item.role_name = item.roles.map(r => r.name).join(',')
             item.roles = item.roles.map(r => r.id)
           })
           this.users = response.data
-          this.loading = false;
+          this.loading = false
         })
     },
     deleteHandler(id) {
@@ -221,9 +224,9 @@ export default {
         })
     },
     // 当前页发生改变
-    currentChangeHandler(page){
-      this.param.page = page;
-      this.loadUsers();
+    currentChangeHandler(page) {
+      this.param.page = page
+      this.loadUsers()
     }
   }
 }

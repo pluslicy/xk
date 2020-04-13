@@ -19,8 +19,8 @@
                   <div v-for="(c,index) in data" :key="index" class="course_item" @click="clickNode(c)">
                     <el-row v-if="c.courseDay === d && c.courseTime === t">
                       <div style="font-size:10px">
-                        <div> <strong>{{c.name}}</strong><i>{{ c.teacher?c.teacher.realname:"" }}</i></div>
-                        <div>{{c.type}}</div>
+                        <div> <strong>{{ c.name }}</strong><i>{{ c.teacher?c.teacher.realname:"" }}</i></div>
+                        <div>{{ c.type }}</div>
                       </div>
                       <!-- <el-col :span="18">
                         <strong>{{ c.name }}</strong>
@@ -57,8 +57,8 @@ export default {
     // 加载所有课程信息
   },
   methods: {
-    clickTd(t,d){
-      this.$emit('clickTd', t,d)
+    clickTd(t, d) {
+      this.$emit('clickTd', t, d)
     },
     clickNode(course) {
       this.$emit('clickNode', course)
@@ -78,7 +78,7 @@ export default {
             table-layout: fixed;
             width: 100%;
             border-collapse: collapse;
-           
+
             thead {
                 background-color: #ededed;
                 th {

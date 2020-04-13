@@ -16,7 +16,7 @@
                   <span v-if="d=='时间/日期'">
                     {{ t }}
                   </span>
-                  <div v-for="(c,index)  in courses.list" :key="index" class="course_item" @click="clickNode(c)">
+                  <div v-for="(c,index) in courses.list" :key="index" class="course_item" @click="clickNode(c)">
                     <el-row v-if="c.courseDay === d && c.courseTime === t">
                       <el-col :span="12">
                         <strong>{{ c.name }}</strong>
@@ -80,7 +80,7 @@ export default {
             table-layout: fixed;
             width: 100%;
             border-collapse: collapse;
-           
+
             thead {
                 background-color: #ededed;
                 th {

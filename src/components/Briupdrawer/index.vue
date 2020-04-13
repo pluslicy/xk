@@ -1,17 +1,18 @@
 <template>
   <div class="briup_drawer">
     <el-drawer
-      :size="width" 
+      :size="width"
       :title="title"
-      :visible.sync="visible">
-      
+      :visible.sync="visible"
+    >
+
       <!-- 中间插槽 -->
       <div class="briup_drawer_content">
-        <slot name="content"></slot>
+        <slot name="content" />
       </div>
       <!-- 底部插槽 -->
       <div class="briup_drawer_footer">
-        <slot name="footer"></slot>
+        <slot name="footer" />
       </div>
     </el-drawer>
   </div>
@@ -19,19 +20,19 @@
 <script>
 export default {
   // 期待接受的参数
-  props:["drawerVisible","title","subtitle","width"],
-  computed:{
-    visible:{
-      get(){
-        return this.drawerVisible;
+  props: ['drawerVisible', 'title', 'subtitle', 'width'],
+  computed: {
+    visible: {
+      get() {
+        return this.drawerVisible
       },
-      set(val){
-        this.$emit('on-change-visible',val)
+      set(val) {
+        this.$emit('on-change-visible', val)
       }
     }
   },
-  methods:{
-   
+  methods: {
+
   }
 }
 </script>

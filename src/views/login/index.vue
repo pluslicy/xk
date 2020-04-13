@@ -252,7 +252,7 @@ $light_gray:#eee;
   // background-color: $bg;
   background-image: url('http://134.175.154.93:8888/group1/M00/00/2F/rBAACV52RSGADMwJAAHcvpYPu3g499.jpg') ;
   background-size: cover;
-  
+
   overflow: hidden;
 
   .login-form {

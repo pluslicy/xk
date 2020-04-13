@@ -5,11 +5,11 @@
       <el-button type="primary" size="small" @click="toAdd">添加</el-button>
     </div>
     <el-table
+      v-loading="loading"
       :data="privileges"
       size="small"
       row-key="id"
       :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
-      v-loading="loading"
     >
       <el-table-column prop="name" label="名称" />
       <el-table-column prop="route" label="路径" />
@@ -109,14 +109,14 @@ export default {
       })
     },
     loadprivileges() {
-      this.loading = true;
+      this.loading = true
       const url = '/privilege/findPrivilegeTree'
       get(url)
-      .then(response => {
-        this.foo(response.data)
-        this.privileges = response.data
-        this.loading = false;
-      })
+        .then(response => {
+          this.foo(response.data)
+          this.privileges = response.data
+          this.loading = false
+        })
     },
     foo(privileges) {
       for (const p of privileges) {

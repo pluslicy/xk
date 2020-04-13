@@ -22,8 +22,8 @@ import Briupdrawer from '@/components/Briupdrawer'
 import BriupMap from '@/components/BriupMap'
 
 // 自定义组件
-Vue.component('Briupdrawer',Briupdrawer)
-Vue.component('BriupMap',BriupMap)
+Vue.component('Briupdrawer', Briupdrawer)
+Vue.component('BriupMap', BriupMap)
 
 import Vant from 'vant'
 import 'vant/lib/index.css'
