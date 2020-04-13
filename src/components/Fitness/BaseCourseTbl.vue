@@ -11,19 +11,23 @@
             </thead>
             <tbody>
               <tr v-for="t in times" :key="t">
-                <td v-for="d in days" :key="d">
+                <td v-for="d in days" :key="d" @click="clickTd(t,d)">
                   <!-- 左侧日期 -->
                   <span v-if="d=='时间/日期'">
                     {{ t }}
                   </span>
-                  <div v-for="c in data" :key="c.id" class="course_item" @click="clickNode(c)">
+                  <div v-for="(c,index) in data" :key="index" class="course_item" @click="clickNode(c)">
                     <el-row v-if="c.courseDay === d && c.courseTime === t">
-                      <el-col :span="12">
+                      <div style="font-size:10px">
+                        <div> <strong>{{c.name}}</strong><i>{{ c.teacher?c.teacher.realname:"" }}</i></div>
+                        <div>{{c.type}}</div>
+                      </div>
+                      <!-- <el-col :span="18">
                         <strong>{{ c.name }}</strong>
                       </el-col>
-                      <el-col :span="12">
+                      <el-col :span="6">
                         <em>{{ c.teacher?c.teacher.realname:"" }}</em>
-                      </el-col>
+                      </el-col> -->
                     </el-row>
                   </div>
                 </td>
@@ -53,6 +57,9 @@ export default {
     // 加载所有课程信息
   },
   methods: {
+    clickTd(t,d){
+      this.$emit('clickTd', t,d)
+    },
     clickNode(course) {
       this.$emit('clickNode', course)
     }
@@ -70,19 +77,23 @@ export default {
         table {
             table-layout: fixed;
             width: 100%;
+            border-collapse: collapse;
+           
             thead {
-                background-color: #67a1ff;
+                background-color: #ededed;
                 th {
-                    color: #fff;
+                    color: #333;
                     line-height: 17px;
                     font-weight: normal;
+                    border: 1px solid #ededed;
                 }
             }
             tbody {
-                background-color: #eaf2ff;
+                background-color: #ffffff;
                 td {
                     color: #677998;
                     line-height: 12px;
+                    border: 1px solid #ededed;
                 }
             }
             th,

@@ -9,6 +9,7 @@
       size="small"
       row-key="id"
       :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+      v-loading="loading"
     >
       <el-table-column prop="name" label="名称" />
       <el-table-column prop="route" label="路径" />
@@ -108,12 +109,14 @@ export default {
       })
     },
     loadprivileges() {
+      this.loading = true;
       const url = '/privilege/findPrivilegeTree'
       get(url)
-        .then(response => {
-          this.foo(response.data)
-          this.privileges = response.data
-        })
+      .then(response => {
+        this.foo(response.data)
+        this.privileges = response.data
+        this.loading = false;
+      })
     },
     foo(privileges) {
       for (const p of privileges) {

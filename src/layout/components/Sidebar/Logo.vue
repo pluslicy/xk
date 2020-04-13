@@ -24,8 +24,9 @@ export default {
   },
   data() {
     return {
-      title: '健身房会员选课签到系统',
-      logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
+      title: '校园设备报修系统',
+      //logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png',
+      logo: 'http://134.175.154.93:8888/group1/M00/00/2E/rBAACV5aTtuAC_TVAABYfVjmcAo104.jpg'
     }
   }
 }
@@ -46,7 +47,8 @@ export default {
   width: 100%;
   height: 50px;
   line-height: 50px;
-  background: #2b2f3a;
+  // background: #2b2f3a;
+  background: #386c9c;
   text-align: center;
   overflow: hidden;
 

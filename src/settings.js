@@ -1,10 +1,10 @@
 module.exports = {
-  title: '健身房会员选课签到系统',
+  title: '校园设备报修系统',
   /**
    * @type {boolean} true | false
    * @description Whether show the settings right-panel
    */
-  showSettings: true,
+  showSettings: false,
 
   /**
    * @type {boolean} true | false

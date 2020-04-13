@@ -2,14 +2,15 @@
   <!-- 角色管理 -->
   <div class="role_list">
     <div class="btns">
-      <!-- <el-button type="primary" size="small" @click="toAdd">添加</el-button> -->
+      <el-button type="primary" size="small" @click="toAdd">添加</el-button>
     </div>
-    <el-table :data="roles" size="small">
+    <el-table :data="roles" size="small" v-loading="loading">
+      <el-table-column type="index" :index="1" label="序号"/>
       <el-table-column prop="name" label="角色名称" />
       <el-table-column label="操作" align="center" width="180">
         <template slot-scope="scope">
           <a @click.prevent="deleteHandler(scope.row.id)">移除</a>
-          <!-- <a @click.prevent="toAuthorization(scope.row)">授权</a> -->
+          <a @click.prevent="toAuthorization(scope.row)">授权</a>
           <a @click.prevent="toUpdate(scope.row)">修改</a>
         </template>
       </el-table-column>
@@ -53,6 +54,7 @@ export default {
   data() {
     return {
       form: {},
+      loading:false,
       visible: false,
       authorization_visible: false,
       title: '添加角色',
@@ -116,10 +118,12 @@ export default {
       })
     },
     loadPrivileges() {
+      this.loading = true;
       request.get('/privilege/findPrivilegeTree')
         .then(response => {
           this.foo(response.data)
           this.options = response.data
+          this.loading = false;
         })
     },
     // 递归去除权限中的空children

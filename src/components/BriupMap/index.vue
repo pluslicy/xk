@@ -13,7 +13,7 @@ export default {
     initMap() {
       var map, geolocation
       map = new AMap.Map(document.getElementById('container'))
-      document.getElementById('container').style.height = '220px'
+      document.getElementById('container').style.height = '420px'
       map.plugin('AMap.Geolocation', () => {
         geolocation = new AMap.Geolocation({
           enableHighAccuracy: true, // 是否使用高精度定位，默认:true

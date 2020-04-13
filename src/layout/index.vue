@@ -6,8 +6,8 @@
       <div :class="{'fixed-header':fixedHeader}">
         <navbar />
       </div>
-      <div style="padding:1em">
-        <app-main />
+      <div style="padding:1em;background-color:#f3f3f9">
+        <app-main style="background-color:#ffffff;border-radius:5px;padding:.5em" />
       </div>
       <right-panel v-if="showSettings">
         <settings />

@@ -1,5 +1,6 @@
 // import parseTime, formatTime and set to filter
 export { parseTime, formatTime } from '@/utils'
+import moment from 'moment'
 
 /**
  * Show plural label if time is plural number
@@ -57,6 +58,10 @@ export function numberFormatter(num, digits) {
  */
 export function toThousandFilter(num) {
   return (+num || 0).toString().replace(/^-?\d+/g, m => m.replace(/(?=(?!\b)(\d{3})+$)/g, ','))
+}
+
+export function fmtDate(date){
+  return date?moment(date).format('YYYY-MM-DD HH:mm'):'';
 }
 
 /**

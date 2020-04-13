@@ -18,23 +18,19 @@ import './utils/error-log' // error log
 
 import * as filters from './filters' // global filters
 
+import Briupdrawer from '@/components/Briupdrawer'
+import BriupMap from '@/components/BriupMap'
+
+// 自定义组件
+Vue.component('Briupdrawer',Briupdrawer)
+Vue.component('BriupMap',BriupMap)
+
 import Vant from 'vant'
 import 'vant/lib/index.css'
 
-Vue.use(Vant)
+import '@/styles/university.css'
 
-/**
- * If you don't want to use mock-server
- * you want to use MockJs for mock api
- * you can execute: mockXHR()
- *
- * Currently MockJs will be used in the production environment,
- * please remove it before going online! ! !
- */
-// import { mockXHR } from '../mock'
-// if (process.env.NODE_ENV === 'production') {
-//   mockXHR()
-// }
+Vue.use(Vant)
 
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium' // set element-ui default size
